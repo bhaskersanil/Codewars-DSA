@@ -1,0 +1,40 @@
+//DESCRIPTION:
+Given the string representations of two integers, return the string representation of the sum of those integers.
+
+For example:
+
+sumStrings('1','2') // => '3'
+A string representation of an integer will contain no characters besides the ten numerals "0" to "9".
+
+I have removed the use of BigInteger and BigDecimal in java
+
+Python: your solution need to work with huge numbers (about a milion digits), converting to int will not work.
+
+SOLUTION:
+
+function sumStrings(a, b) {
+  // pad the shorter string with zeros so that both strings have the same length
+  if (a.length < b.length) {
+    a = a.padStart(b.length, '0');
+  } else {
+    b = b.padStart(a.length, '0');
+  }
+
+  let carry = 0;
+  let result = '';
+
+  for (let i = a.length - 1; i >= 0; i--) {
+    let sum = carry + Number(a[i]) + Number(b[i]);
+    carry = Math.floor(sum / 10);
+    result = (sum % 10).toString() + result;
+  }
+
+  if (carry > 0) {
+    result = carry.toString() + result;
+  }
+
+  // remove leading zeros
+  result = result.replace(/^0+/, '');
+
+  return result;
+}
