@@ -1,0 +1,28 @@
+Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+
+moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+
+function moveZeros(array) {
+  // Initialize two pointers: one for the current element, and one for the next zero
+  let current = 0;
+  let nextZero = 0;
+
+  // Loop through the array
+  while (current < array.length) {
+    // If the current element is not zero, swap it with the element at the nextZero position
+    if (array[current] !== 0) {
+      [array[current], array[nextZero]] = [array[nextZero], array[current]];
+      nextZero++;
+    }
+    current++;
+  }
+
+  return array;
+}
+
+
+This function works by maintaining two pointers: current and nextZero. The current pointer is used to iterate through the array, while the nextZero pointer is used to keep track of the next position where a zero should be placed.
+
+If the current element is not zero, it is swapped with the element at the nextZero position. This has the effect of moving all of the non-zero elements to the front of the array, while leaving the zeros at the end. The nextZero pointer is then incremented to move it to the next position where a zero should be placed.
+
+The function returns the modified array once all of the elements have been processed.
