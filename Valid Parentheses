@@ -1,0 +1,29 @@
+Write a function that takes a string of parentheses, and determines if the order of the parentheses is valid. The function should return true if the string is valid, and false if it's invalid.
+
+Examples
+"()"              =>  true
+")(()))"          =>  false
+"("               =>  false
+"(())((()())())"  =>  true
+Constraints
+0 <= input.length <= 100
+
+function isValid(input) {
+  // Initialize a stack to store the parentheses
+  const stack = [];
+
+  // Iterate through the input string
+  for (const ch of input) {
+    if (ch === '(') {
+      // If the character is an opening parenthesis, push it onto the stack
+      stack.push(ch);
+    } else if (ch === ')') {
+      // If the character is a closing parenthesis, pop the top element from the stack
+      // If the stack is empty or the top element is not an opening parenthesis, return false
+      if (stack.length === 0 || stack.pop() !== '(') return false;
+    }
+  }
+
+  // Return true if the stack is empty, false otherwise
+  return stack.length === 0;
+}
